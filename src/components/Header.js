@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles, AppBar, Tabs, Tab, Toolbar } from '@material-ui/core';
 import Page from '../util/pages';
 import Links from '../util/links';
@@ -37,6 +38,16 @@ const Header = (props) => <AppBar position="static">
 		/>
 	</Toolbar>
 </AppBar>;
+
+Header.propTypes = {
+	page: PropTypes.any.isRequired,
+	handlePageChange: PropTypes.func.isRequired,
+	classes: PropTypes.shape({
+		logo: PropTypes.string.isRequired,
+		expandFlex: PropTypes.string.isRequired,
+		socialMediaTab: PropTypes.string.isRequired
+	}).isRequired
+}
 
 const styles = theme => ({
 	logo: {
