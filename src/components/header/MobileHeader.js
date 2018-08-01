@@ -22,7 +22,7 @@ class MobileHeaderUnstyled extends React.Component {
 
 	render() {
 		return <React.Fragment>
-			<AppBar position="static">
+			<AppBar position="fixed">
 				<Toolbar>
 					<IconButton
 						color="inherit"

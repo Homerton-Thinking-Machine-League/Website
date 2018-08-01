@@ -2,8 +2,9 @@ import React from 'react';
 import Page from '../util/pages';
 import Header from './header/Header';
 import { Home, Events, Committee, StudyHom, Privacy } from './pages';
+import { withStyles } from '@material-ui/core';
 
-export default class App extends React.Component {
+class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -21,17 +22,32 @@ export default class App extends React.Component {
 				page={this.state.currentPage}
 				handlePageChange={this.handlePageChange.bind(this)}
 			/>
-			{(() => {
-				switch(this.state.currentPage) {
-					case Page.home: return <Home/>;
-					case Page.events: return <Events/>;
-					case Page.committee: return <Committee/>;
-					case Page.studyHom: return <StudyHom/>;
-					case Page.privacy: return <Privacy/>;
-					default: return null;
-				}
-			})()}
-
+			<div className={this.props.classes.content}>
+				{(() => {
+					switch(this.state.currentPage) {
+						case Page.home: return <Home/>;
+						case Page.events: return <Events/>;
+						case Page.committee: return <Committee/>;
+						case Page.studyHom: return <StudyHom/>;
+						case Page.privacy: return <Privacy/>;
+						default: return null;
+					}
+				})()}
+			</div>
 		</React.Fragment>
 	}
-}
+};
+
+const styles = theme => ({
+	content: {
+		padding: 3 * theme.spacing.unit,
+		[theme.breakpoints.up('md')]: {
+			"padding-top": 75 + 3 * theme.spacing.unit
+		},
+		[theme.breakpoints.down('sm')]: {
+			"padding-top": 50 + 3 * theme.spacing.unit
+		}
+	}
+});
+
+export default withStyles(styles)(App)

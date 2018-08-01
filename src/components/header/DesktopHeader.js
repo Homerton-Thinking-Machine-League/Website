@@ -6,7 +6,7 @@ import Links from '../../util/links';
 import { Facebook, Github } from '../Svg';
 import logo from '../../res/logo.png';
 
-const DesktopHeaderUnstyled = (props) => <AppBar position="static">
+const DesktopHeaderUnstyled = (props) => <AppBar position="fixed">
 	<Toolbar>
 		<img src={logo} alt="logo" className={props.classes.logo}/>
 		<Tabs

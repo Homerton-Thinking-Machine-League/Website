@@ -5,11 +5,11 @@ import { Hidden } from '@material-ui/core';
 
 const Header = (props) => <React.Fragment>
 	<Hidden smDown>
-		<DesktopHeader {...props}/>	
+		<DesktopHeader {...props}/>
 	</Hidden>
 	<Hidden mdUp>
 		<MobileHeader {...props}/>
 	</Hidden>
-</React.Fragment>
+</React.Fragment>;
 
 export default Header;
