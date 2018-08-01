@@ -48,7 +48,7 @@ const styles = theme => ({
 		flex: 1
 	},
 	socialMediaTab: {
-		'min-width': 0,
+		minWidth: 0,
 		padding: theme.spacing.unit
 	}
 });

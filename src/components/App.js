@@ -52,24 +52,24 @@ const styles = theme => ({
 		position: "fixed",
 		height: "100%",
 		width: "100%",
-		"background-image": `url(${background})`,
-		"background-position": "center",
-		"background-repeat": "no-repeat",
-		"background-size": "cover",
+		backgroundImage: `url(${background})`,
+		backgroundPosition: "center",
+		backgroundRepeat: "no-repeat",
+		backgroundSize: "cover",
 	},
 	content: {
-		"max-width": 800,
+		maxWidth: 800,
 		margin: "auto",
 		padding: 3 * theme.spacing.unit,
 		[theme.breakpoints.up('md')]: {
-			"padding-top": 75 + 3 * theme.spacing.unit
+			paddingTop: 75 + 3 * theme.spacing.unit
 		},
 		[theme.breakpoints.down('sm')]: {
-			"padding-top": 50 + 3 * theme.spacing.unit
+			paddingTop: 50 + 3 * theme.spacing.unit
 		}
 	},
 	mobilePageHeader: {
-		"padding-bottom": 3 * theme.spacing.unit
+		paddingBottom: 3 * theme.spacing.unit
 	}
 });
 

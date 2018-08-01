@@ -78,7 +78,7 @@ const styles = theme => ({
 	drawerPaper: {
 		position: "relative",
 		width: "33%",
-		"min-width": "240px"
+		minWidth: "240px"
 	}
 })
 
