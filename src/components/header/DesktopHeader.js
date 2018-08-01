@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, AppBar, Tabs, Tab, Toolbar } from '@material-ui/core';
-import Page from '../util/pages';
-import Links from '../util/links';
-import { Facebook, Github } from './Svg';
-import logo from '../res/logo.png';
+import Page from '../../util/pages';
+import Links from '../../util/links';
+import { Facebook, Github } from '../Svg';
+import logo from '../../res/logo.png';
 
-const Header = (props) => <AppBar position="static">
+const DesktopHeaderUnstyled = (props) => <AppBar position="static">
 	<Toolbar>
 		<img src={logo} alt="logo" className={props.classes.logo}/>
 		<Tabs
@@ -39,16 +39,6 @@ const Header = (props) => <AppBar position="static">
 	</Toolbar>
 </AppBar>;
 
-Header.propTypes = {
-	page: PropTypes.any.isRequired,
-	handlePageChange: PropTypes.func.isRequired,
-	classes: PropTypes.shape({
-		logo: PropTypes.string.isRequired,
-		expandFlex: PropTypes.string.isRequired,
-		socialMediaTab: PropTypes.string.isRequired
-	}).isRequired
-}
-
 const styles = theme => ({
 	logo: {
 		padding: theme.spacing.unit,
@@ -61,6 +51,13 @@ const styles = theme => ({
 		'min-width': 0,
 		padding: theme.spacing.unit
 	}
-})
+});
 
-export default withStyles(styles)(Header);
+const DesktopHeader = withStyles(styles)(DesktopHeaderUnstyled);
+
+DesktopHeader.propTypes = {
+	page: PropTypes.any.isRequired,
+	handlePageChange: PropTypes.func.isRequired,
+}
+
+export default DesktopHeader;

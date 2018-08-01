@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from '../util/pages';
-import Header from './Header';
+import Header from './header/Header';
 import { Home, Events, Committee, StudyHom, Privacy } from './pages';
 
 export default class App extends React.Component {
