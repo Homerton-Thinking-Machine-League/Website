@@ -58,6 +58,8 @@ const styles = theme => ({
 		"background-size": "cover",
 	},
 	content: {
+		"max-width": 800,
+		margin: "auto",
 		padding: 3 * theme.spacing.unit,
 		[theme.breakpoints.up('md')]: {
 			"padding-top": 75 + 3 * theme.spacing.unit
