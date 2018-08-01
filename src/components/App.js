@@ -2,7 +2,8 @@ import React from 'react';
 import Page from '../util/pages';
 import Header from './header/Header';
 import { Home, Events, Committee, StudyHom, Privacy } from './pages';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Hidden, Typography } from '@material-ui/core';
+import background from '../res/Homerton.jpg';
 
 class App extends React.Component {
 	constructor() {
@@ -18,11 +19,17 @@ class App extends React.Component {
 
 	render() {
 		return <React.Fragment>
+			<div className={this.props.classes.background}/>
 			<Header
 				page={this.state.currentPage}
 				handlePageChange={this.handlePageChange.bind(this)}
 			/>
 			<div className={this.props.classes.content}>
+				<Hidden mdUp>
+					<Typography variant="title" color="inherit" className={this.props.classes.mobilePageHeader}>
+						{Page.getPageLabel(this.state.currentPage)}
+					</Typography>
+				</Hidden>
 				{(() => {
 					switch(this.state.currentPage) {
 						case Page.home: return <Home/>;
@@ -39,6 +46,17 @@ class App extends React.Component {
 };
 
 const styles = theme => ({
+	background: {
+		zIndex: -1,
+		display: "block",
+		position: "fixed",
+		height: "100%",
+		width: "100%",
+		"background-image": `url(${background})`,
+		"background-position": "center",
+		"background-repeat": "no-repeat",
+		"background-size": "cover",
+	},
 	content: {
 		padding: 3 * theme.spacing.unit,
 		[theme.breakpoints.up('md')]: {
@@ -47,6 +65,9 @@ const styles = theme => ({
 		[theme.breakpoints.down('sm')]: {
 			"padding-top": 50 + 3 * theme.spacing.unit
 		}
+	},
+	mobilePageHeader: {
+		"padding-bottom": 3 * theme.spacing.unit
 	}
 });
 
