@@ -51,6 +51,7 @@ class MobileHeaderUnstyled extends React.Component {
 					{["home", "events", "committee", "studyHom"].map(pageName => Page[pageName])
 						.map(page => <MenuItem
 								key={page}
+								selected={this.props.page === page}
 								onClick={this.handleDrawerToggle.bind(this, () => this.props.handlePageChange(page))}
 							>
 							<ListItemIcon>{Page.getPageIcon(page)}</ListItemIcon>
