@@ -14,7 +14,7 @@ const DesktopHeader = props => (
             <Tabs
                 value={props.history.location.pathname}
             >
-                {['home', 'events', 'committee', 'studyHom'].map(pageName => Page[pageName])
+                {props.pages.map(pageName => Page[pageName])
                     .map(page => (
                         <Tab
                             key={page}
@@ -51,6 +51,7 @@ DesktopHeader.propTypes = {
             pathname: PropTypes.string,
         }).isRequired,
     }).isRequired,
+    pages: PropTypes.arrayOf(PropTypes.string).isRequired,
     classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 

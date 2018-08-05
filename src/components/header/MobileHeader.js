@@ -51,7 +51,7 @@ class MobileHeader extends React.Component {
                     }}
                 >
                     <MenuList>
-                        {['home', 'events', 'committee', 'studyHom'].map(pageName => Page[pageName])
+                        {this.props.pages.map(pageName => Page[pageName])
                             .map(page => (
                                 <Route key={page} path={Page.routes[page]}>
                                     {({ match }) => (
@@ -85,6 +85,7 @@ class MobileHeader extends React.Component {
 }
 
 MobileHeader.propTypes = {
+    pages: PropTypes.arrayOf(PropTypes.string).isRequired,
     classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 

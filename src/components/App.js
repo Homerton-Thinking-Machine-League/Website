@@ -5,13 +5,15 @@ import { withStyles, Hidden, Typography } from '@material-ui/core';
 import Page from '../util/pages';
 import Header from './header/Header';
 import NotificationLayer from './notifications/NotificationLayer';
-import { Home, Events, Committee, StudyHom, Privacy } from './pages';
+import { Home, News, Events, Committee, StudyHom, Privacy } from './pages';
 import background from '../res/Homerton.jpg';
 
 const App = props => (
     <React.Fragment>
         <div className={props.classes.background} />
-        <Header />
+        <Header
+            pages={['home', 'news', 'events', 'committee', 'studyHom']}
+        />
         <div className={props.classes.content}>
             <Hidden mdUp>
                 <Typography
@@ -28,6 +30,7 @@ const App = props => (
             <NotificationLayer>
                 <Switch>
                     <Route exact path={Page.routes[Page.home]} component={Home} />
+                    <Route path={Page.routes[Page.news]} component={News} />
                     <Route path={Page.routes[Page.events]} component={Events} />
                     <Route path={Page.routes[Page.committee]} component={Committee} />
                     <Route path={Page.routes[Page.studyHom]} component={StudyHom} />
