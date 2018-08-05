@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import { withStyles, AppBar, Tabs, Tab, Toolbar } from '@material-ui/core';
 import Page from '../../util/pages';
-import Links from '../../util/links';
+import ExternalURLs from '../../util/externalUrls';
 import { Facebook, Github } from '../Svg';
 import logo from '../../res/logo.png';
 
@@ -11,17 +12,18 @@ const DesktopHeader = props => (
         <Toolbar>
             <img src={logo} alt="logo" className={props.classes.logo} />
             <Tabs
-                value={props.page}
-                onChange={(_, newPage) => props.handlePageChange(newPage)}
+                value={props.history.location.pathname}
             >
                 {['home', 'events', 'committee', 'studyHom'].map(pageName => Page[pageName])
                     .map(page => (
                         <Tab
                             key={page}
-                            value={page}
+                            value={Page.routes[page]}
                             color="inherit"
-                            label={Page.getPageLabel(page)}
-                            icon={Page.getPageIcon(page)}
+                            label={Page.pageLabels[page]}
+                            icon={Page.pageIcons[page]}
+                            component={Link}
+                            to={Page.routes[page]}
                         />
                     ))
                 }
@@ -31,12 +33,12 @@ const DesktopHeader = props => (
 
             <Tab
                 className={props.classes.socialMediaTab}
-                href={Links.facebook}
+                href={ExternalURLs.facebook}
                 icon={<Facebook />}
             />
             <Tab
                 className={props.classes.socialMediaTab}
-                href={Links.github}
+                href={ExternalURLs.github}
                 icon={<Github />}
             />
         </Toolbar>
@@ -44,8 +46,11 @@ const DesktopHeader = props => (
 );
 
 DesktopHeader.propTypes = {
-    page: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
-    handlePageChange: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+        location: PropTypes.shape({
+            pathname: PropTypes.string,
+        }).isRequired,
+    }).isRequired,
     classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
@@ -63,4 +68,4 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles)(DesktopHeader);
+export default withStyles(styles)(withRouter(DesktopHeader));

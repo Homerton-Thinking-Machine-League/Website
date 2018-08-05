@@ -14,25 +14,27 @@ const Page = {
     privacy: 4,
 };
 
-Page.getPageLabel = (page) => {
-    switch (page) {
-    case Page.home: return 'Home';
-    case Page.events: return 'Events';
-    case Page.committee: return 'Committee';
-    case Page.studyHom: return 'Study at Homerton';
-    case Page.privacy: return 'Privacy Policy';
-    default: return '';
-    }
+Page.routes = {
+    [Page.home]: '/',
+    [Page.events]: '/events',
+    [Page.committee]: '/committee',
+    [Page.studyHom]: '/studyHom',
+    [Page.privacy]: '/privacy',
 };
 
-Page.getPageIcon = (page) => {
-    switch (page) {
-    case Page.home: return <Home />;
-    case Page.events: return <Events />;
-    case Page.committee: return <Committee />;
-    case Page.studyHom: return <Homerton />;
-    default: return null;
-    }
+Page.pageLabels = {
+    [Page.home]: 'Home',
+    [Page.events]: 'Events',
+    [Page.committee]: 'Committee',
+    [Page.studyHom]: 'Study at Homerton',
+    [Page.privacy]: 'Privacy Policy',
+};
+
+Page.pageIcons = {
+    [Page.home]: <Home />,
+    [Page.events]: <Events />,
+    [Page.committee]: <Committee />,
+    [Page.studyHom]: <Homerton />,
 };
 
 Object.freeze(Page);

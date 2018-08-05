@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Paper, Typography, Button } from '@material-ui/core';
-import Links from '../../util/links';
+import Links from '../../util/externalUrls';
 
 const Home = props => (
     <Paper className={props.classes.homePaper}>

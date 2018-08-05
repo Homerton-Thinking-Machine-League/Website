@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, AppBar, Drawer, MenuList, MenuItem, ListItem, ListItemIcon, ListItemText, Divider, IconButton, Typography, Toolbar } from '@material-ui/core';
+import { Route, Link } from 'react-router-dom';
+import {
+    withStyles, AppBar, Drawer, MenuList, MenuItem, ListItem, ListItemIcon,
+    ListItemText, Divider, IconButton, Typography, Toolbar,
+} from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import Page from '../../util/pages';
-import Links from '../../util/links';
+import Links from '../../util/externalUrls';
 import { Facebook, Github } from '../Svg';
 
 class MobileHeader extends React.Component {
@@ -14,8 +18,8 @@ class MobileHeader extends React.Component {
         };
     }
 
-    handleDrawerToggle(callback) {
-        this.setState(prevState => ({ drawerOpen: !prevState.drawerOpen }), callback);
+    handleDrawerToggle() {
+        this.setState(prevState => ({ drawerOpen: !prevState.drawerOpen }));
     }
 
     render() {
@@ -38,7 +42,7 @@ class MobileHeader extends React.Component {
                     variant="temporary"
                     anchor="left"
                     open={this.state.drawerOpen}
-                    onClose={() => this.handleDrawerToggle(undefined)}
+                    onClose={() => this.handleDrawerToggle()}
                     classes={{
                         paper: this.props.classes.drawerPaper,
                     }}
@@ -49,17 +53,20 @@ class MobileHeader extends React.Component {
                     <MenuList>
                         {['home', 'events', 'committee', 'studyHom'].map(pageName => Page[pageName])
                             .map(page => (
-                                <MenuItem
-                                    key={page}
-                                    selected={this.props.page === page}
-                                    onClick={() =>
-                                        this.handleDrawerToggle(() =>
-                                            this.props.handlePageChange(page))
-                                    }
-                                >
-                                    <ListItemIcon>{Page.getPageIcon(page)}</ListItemIcon>
-                                    <ListItemText>{Page.getPageLabel(page)}</ListItemText>
-                                </MenuItem>
+                                <Route key={page} path={Page.routes[page]}>
+                                    {({ match }) => (
+                                        <Link to={Page.routes[page]}>
+                                            <MenuItem
+                                                key={page}
+                                                selected={match != null && match.isExact}
+                                                onClick={() => this.handleDrawerToggle()}
+                                            >
+                                                <ListItemIcon>{Page.pageIcons[page]}</ListItemIcon>
+                                                <ListItemText>{Page.pageLabels[page]}</ListItemText>
+                                            </MenuItem>
+                                        </Link>
+                                    )}
+                                </Route>
                             ))
                         }
                         <Divider />
@@ -78,8 +85,6 @@ class MobileHeader extends React.Component {
 }
 
 MobileHeader.propTypes = {
-    page: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
-    handlePageChange: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 

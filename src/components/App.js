@@ -1,55 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { withStyles, Hidden, Typography } from '@material-ui/core';
 import Page from '../util/pages';
 import Header from './header/Header';
 import { Home, Events, Committee, StudyHom, Privacy } from './pages';
 import background from '../res/Homerton.jpg';
 
-class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            currentPage: Page.home,
-        };
-    }
-
-    handlePageChange(newPage) {
-        this.setState({ currentPage: newPage });
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <div className={this.props.classes.background} />
-                <Header
-                    page={this.state.currentPage}
-                    handlePageChange={newPage => this.handlePageChange(newPage)}
-                />
-                <div className={this.props.classes.content}>
-                    <Hidden mdUp>
-                        <Typography variant="title" color="inherit" className={this.props.classes.mobilePageHeader}>
-                            {Page.getPageLabel(this.state.currentPage)}
-                        </Typography>
-                    </Hidden>
-                    {(() => {
-                        switch (this.state.currentPage) {
-                        case Page.home: return <Home />;
-                        case Page.events: return <Events />;
-                        case Page.committee: return <Committee />;
-                        case Page.studyHom: return <StudyHom />;
-                        case Page.privacy: return <Privacy />;
-                        default: return null;
-                        }
-                    })()}
-                </div>
-            </React.Fragment>
-        );
-    }
-}
+const App = props => (
+    <React.Fragment>
+        <div className={props.classes.background} />
+        <Header />
+        <div className={props.classes.content}>
+            <Hidden mdUp>
+                <Typography
+                    variant="title"
+                    color="inherit"
+                    className={props.classes.mobilePageHeader}
+                >
+                    {Page.pageLabels[
+                        Object.keys(Page.routes)
+                            .find(page => Page.routes[page] === props.history.location.pathname)
+                    ]}
+                </Typography>
+            </Hidden>
+            <Switch>
+                <Route exact path={Page.routes[Page.home]} component={Home} />
+                <Route path={Page.routes[Page.events]} component={Events} />
+                <Route path={Page.routes[Page.committee]} component={Committee} />
+                <Route path={Page.routes[Page.studyHom]} component={StudyHom} />
+                <Route path={Page.routes[Page.privacy]} component={Privacy} />
+            </Switch>
+        </div>
+    </React.Fragment>
+);
 
 App.propTypes = {
     classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    history: PropTypes.shape({
+        location: PropTypes.shape({
+            pathname: PropTypes.string,
+        }).isRequired,
+    }).isRequired,
 };
 
 const styles = theme => ({
@@ -80,4 +72,4 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(withRouter(App));
