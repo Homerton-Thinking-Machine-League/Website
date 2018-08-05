@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { withStyles, Hidden, Typography } from '@material-ui/core';
 import Page from '../util/pages';
 import Header from './header/Header';
+import NotificationLayer from './notifications/NotificationLayer';
 import { Home, Events, Committee, StudyHom, Privacy } from './pages';
 import background from '../res/Homerton.jpg';
 
@@ -24,13 +25,15 @@ const App = props => (
                     ]}
                 </Typography>
             </Hidden>
-            <Switch>
-                <Route exact path={Page.routes[Page.home]} component={Home} />
-                <Route path={Page.routes[Page.events]} component={Events} />
-                <Route path={Page.routes[Page.committee]} component={Committee} />
-                <Route path={Page.routes[Page.studyHom]} component={StudyHom} />
-                <Route path={Page.routes[Page.privacy]} component={Privacy} />
-            </Switch>
+            <NotificationLayer>
+                <Switch>
+                    <Route exact path={Page.routes[Page.home]} component={Home} />
+                    <Route path={Page.routes[Page.events]} component={Events} />
+                    <Route path={Page.routes[Page.committee]} component={Committee} />
+                    <Route path={Page.routes[Page.studyHom]} component={StudyHom} />
+                    <Route path={Page.routes[Page.privacy]} component={Privacy} />
+                </Switch>
+            </NotificationLayer>
         </div>
     </React.Fragment>
 );
