@@ -6,58 +6,61 @@ import Links from '../../util/links';
 import { Facebook, Github } from '../Svg';
 import logo from '../../res/logo.png';
 
-const DesktopHeaderUnstyled = (props) => <AppBar position="fixed">
-	<Toolbar>
-		<img src={logo} alt="logo" className={props.classes.logo}/>
-		<Tabs
-			value={props.page}
-			onChange={(_, newPage) => props.handlePageChange(newPage)}
-		>
-			{["home", "events", "committee", "studyHom"].map(pageName => Page[pageName])
-				.map(page => <Tab
-					key={page}
-					value={page}
-					color="inherit"
-					label={Page.getPageLabel(page)}
-					icon={Page.getPageIcon(page)}
-				/>)
-			}
-		</Tabs>
+const DesktopHeader = props => (
+    <AppBar position="fixed">
+        <Toolbar>
+            <img src={logo} alt="logo" className={props.classes.logo} />
+            <Tabs
+                value={props.page}
+                onChange={(_, newPage) => props.handlePageChange(newPage)}
+            >
+                {['home', 'events', 'committee', 'studyHom'].map(pageName => Page[pageName])
+                    .map(page => (
+                        <Tab
+                            key={page}
+                            value={page}
+                            color="inherit"
+                            label={Page.getPageLabel(page)}
+                            icon={Page.getPageIcon(page)}
+                        />
+                    ))
+                }
+            </Tabs>
 
-		<div className={props.classes.expandFlex}/>
+            <div className={props.classes.expandFlex} />
 
-		<Tab
-			className={props.classes.socialMediaTab}
-			href={Links.facebook}
-			icon={<Facebook/>}
-		/>
-		<Tab
-			className={props.classes.socialMediaTab}
-			href={Links.github}
-			icon={<Github/>}
-		/>
-	</Toolbar>
-</AppBar>;
-
-const styles = theme => ({
-	logo: {
-		padding: theme.spacing.unit,
-		width: "120px"
-	},
-	expandFlex: {
-		flex: 1
-	},
-	socialMediaTab: {
-		minWidth: 0,
-		padding: theme.spacing.unit
-	}
-});
-
-const DesktopHeader = withStyles(styles)(DesktopHeaderUnstyled);
+            <Tab
+                className={props.classes.socialMediaTab}
+                href={Links.facebook}
+                icon={<Facebook />}
+            />
+            <Tab
+                className={props.classes.socialMediaTab}
+                href={Links.github}
+                icon={<Github />}
+            />
+        </Toolbar>
+    </AppBar>
+);
 
 DesktopHeader.propTypes = {
-	page: PropTypes.any.isRequired,
-	handlePageChange: PropTypes.func.isRequired,
-}
+    page: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
+    handlePageChange: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
 
-export default DesktopHeader;
+const styles = theme => ({
+    logo: {
+        padding: theme.spacing.unit,
+        width: '120px',
+    },
+    expandFlex: {
+        flex: 1,
+    },
+    socialMediaTab: {
+        minWidth: 0,
+        padding: theme.spacing.unit,
+    },
+});
+
+export default withStyles(styles)(DesktopHeader);

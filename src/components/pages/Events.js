@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Events = (props) => <div> Events Page </div>
+const Events = () => <div> Events Page </div>;
 
 export default Events;
