@@ -260,3 +260,6 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/node,macos,linux,windows,sublimetext,jetbrains+all,visualstudiocode
+
+# Webpack output
+build
