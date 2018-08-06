@@ -21,9 +21,7 @@ react_app_folder = "../build/"
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react_app(path):
-    print(os.path.exists(react_app_folder + path))
     if path == "" or not os.path.exists(react_app_folder + path):
-        print("sending index")
         return send_from_directory(react_app_folder, 'index.html')
     return send_from_directory(react_app_folder, path)
         
