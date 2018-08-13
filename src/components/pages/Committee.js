@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Grid, Avatar, Card, CardContent, CardActions, Typography, Button } from '@material-ui/core';
 import { Email } from '@material-ui/icons';
+import { NotificationContext } from '../../util/notifications';
 import Loader from '../Loader';
 
 class Committee extends React.Component {
     static propTypes = {
         classes: PropTypes.objectOf(PropTypes.string).isRequired,
+        addNotification: PropTypes.func.isRequired,
     }
 
     constructor() {
@@ -14,7 +16,6 @@ class Committee extends React.Component {
         this.state = {
             loading: true,
             data: null,
-            error: null,
         };
     }
 
@@ -32,12 +33,15 @@ class Committee extends React.Component {
                             };
                         }))))
             .then(data => this.setState({ loading: false, data }))
-            .catch(error => this.setState({ loading: false, error }));
+            .catch((error) => {
+                this.setState({ loading: false });
+                this.props.addNotification('error', error.message);
+            });
     }
 
     render() {
         const { classes } = this.props;
-        const { loading, data, error } = this.state;
+        const { loading, data } = this.state;
         if (loading) {
             return <Loader />;
         }
@@ -75,7 +79,7 @@ class Committee extends React.Component {
                 </Grid>
             );
         }
-        return <div>Error: {error}</div>;
+        return null;
     }
 }
 
@@ -98,4 +102,12 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles)(Committee);
+const NotificationContextWrapper = props => (
+    <NotificationContext.Consumer>
+        {({ addNotification }) => (
+            <Committee {...props} addNotification={addNotification} />
+        )}
+    </NotificationContext.Consumer>
+);
+
+export default withStyles(styles)(NotificationContextWrapper);
