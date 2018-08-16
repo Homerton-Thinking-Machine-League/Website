@@ -5,9 +5,9 @@ name = "pypi"
 
 [packages]
 flask = "*"
-flask-migrate = "*"
 sqlalchemy = "*"
 pymysql = "*"
+alembic = "*"
 
 [dev-packages]
 
