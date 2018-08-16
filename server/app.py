@@ -1,7 +1,9 @@
 import os
 from flask import Flask, send_from_directory, send_file, redirect, request, abort
+import db
 
 app = Flask(__name__, static_folder="../build/")
+db.init('dbconf.json')
 
 @app.route('/api/committee')
 def get_committee():
