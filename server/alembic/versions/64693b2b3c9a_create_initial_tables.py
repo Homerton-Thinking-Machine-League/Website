@@ -50,7 +50,7 @@ def upgrade():
         'posts',
         sa.Column('id', sa.INTEGER, primary_key=True),
         sa.Column('author_id', sa.INTEGER, sa.ForeignKey('users.id'), nullable=False),
-        sa.Column('time', sa.DATETIME(timezone=True)),
+        sa.Column('time', sa.TIMESTAMP(timezone=True)),
         sa.Column('text', sa.TEXT)
     )
 
