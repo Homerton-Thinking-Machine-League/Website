@@ -69,7 +69,7 @@ class News extends React.Component {
                                     {News.getTimeString(post.time)}
                                 </Typography>
                             </div>
-                            <div
+                            <Typography
                                 // eslint-disable-next-line react/no-danger
                                 dangerouslySetInnerHTML={{ __html: marked(post.text) }}
                             />
