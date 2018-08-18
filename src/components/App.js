@@ -6,11 +6,11 @@ import Page from '../util/pages';
 import Header from './header/Header';
 import NotificationLayer from './notifications/NotificationLayer';
 import { Home, News, Events, Committee, StudyHom, Privacy } from './pages';
-import theme from '../theme';
+import appTheme from '../theme';
 import background from '../res/Homerton.jpg';
 
 const App = props => (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={appTheme}>
         <CssBaseline />
         <div className={props.classes.background} />
         <Header
