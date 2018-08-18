@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import { withStyles, Hidden, Typography } from '@material-ui/core';
+import { MuiThemeProvider, CssBaseline, withStyles, Hidden, Typography } from '@material-ui/core';
 import Page from '../util/pages';
 import Header from './header/Header';
 import NotificationLayer from './notifications/NotificationLayer';
 import { Home, News, Events, Committee, StudyHom, Privacy } from './pages';
+import theme from '../theme';
 import background from '../res/Homerton.jpg';
 
 const App = props => (
-    <React.Fragment>
+    <MuiThemeProvider theme={theme}>
+        <CssBaseline />
         <div className={props.classes.background} />
         <Header
             pages={['home', 'news', 'events', 'committee', 'studyHom']}
@@ -38,7 +40,7 @@ const App = props => (
                 </Switch>
             </NotificationLayer>
         </div>
-    </React.Fragment>
+    </MuiThemeProvider>
 );
 
 App.propTypes = {
