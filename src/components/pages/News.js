@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Card, CardContent, Typography } from '@material-ui/core';
 import moment from 'moment';
-import marked from 'marked';
+import marked from '../../util/markdown';
 import Loader from '../Loader';
 import { NotificationContext } from '../../util/notifications';
 

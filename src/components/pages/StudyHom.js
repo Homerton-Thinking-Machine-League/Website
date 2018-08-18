@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Paper, Typography } from '@material-ui/core';
-import marked from 'marked';
+import marked from '../../util/markdown';
 
 const StudyHom = props => (
     <Paper className={props.classes.homePaper}>
