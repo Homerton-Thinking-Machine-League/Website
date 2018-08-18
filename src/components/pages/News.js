@@ -60,12 +60,14 @@ class News extends React.Component {
                 {posts.map(post => (
                     <Card key={post.id} className={classes.card}>
                         <CardContent>
-                            <Typography className={classes.title} color="textSecondary">
-                                {post.author}
-                            </Typography>
-                            <Typography className={classes.title} color="textSecondary">
-                                {News.getTimeString(post.time)}
-                            </Typography>
+                            <div className={classes.meta}>
+                                <Typography color="textSecondary">
+                                    {post.author}
+                                </Typography>
+                                <Typography color="textSecondary">
+                                    {News.getTimeString(post.time)}
+                                </Typography>
+                            </div>
                             <div
                                 // eslint-disable-next-line react/no-danger
                                 dangerouslySetInnerHTML={{ __html: marked(post.text) }}
@@ -83,6 +85,11 @@ const styles = theme => ({
     card: {
         padding: 2 * theme.spacing.unit,
         marginBottom: 2 * theme.spacing.unit,
+    },
+    meta: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
     },
 });
 
