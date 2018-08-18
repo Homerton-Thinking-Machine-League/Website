@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Paper, Typography, Button } from '@material-ui/core';
+import { withStyles, Typography, Button } from '@material-ui/core';
 import marked from '../../util/markdown';
 import Links from '../../util/externalUrls';
+import PaddedPaper from '../PaddedPaper';
 
 const Home = props => (
-    <Paper className={props.classes.homePaper}>
-
+    <PaddedPaper>
         <Typography
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
@@ -52,7 +52,7 @@ So what are you waiting for? Sign up to hear about our events by clicking the bi
                 </Typography>
             </Button>
         </div>
-    </Paper>
+    </PaddedPaper>
 );
 
 Home.propTypes = {
@@ -60,12 +60,6 @@ Home.propTypes = {
 };
 
 const styles = theme => ({
-    homePaper: {
-        paddingTop: theme.spacing.unit * 3,
-        paddingBottom: theme.spacing.unit * 3,
-        paddingLeft: theme.spacing.unit * 8,
-        paddingRight: theme.spacing.unit * 8,
-    },
     signUpButtonWrapper: {
         display: 'flex',
         justifyContent: 'center',

@@ -88,6 +88,10 @@ const styles = theme => ({
         maxWidth: '325px',
         height: '100%',
         margin: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'stretch',
     },
     avatar: {
         width: '120px',
@@ -97,7 +101,7 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 2,
     },
     cardActions: {
-        width: '100%',
+        display: 'flex',
         justifyContent: 'flex-end',
     },
 });

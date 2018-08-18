@@ -1,23 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles, Paper, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import PaddedPaper from '../PaddedPaper';
 
-const Events = props => (
-    <Paper className={props.classes.paper}>
+const Events = () => (
+    <PaddedPaper>
         <Typography variant="subheading">
             The events will appear here when we finialise the schedule.
         </Typography>
-    </Paper>
+    </PaddedPaper>
 );
 
-Events.propTypes = {
-    classes: PropTypes.objectOf(PropTypes.string).isRequired,
-};
-
-const styles = theme => ({
-    paper: {
-        padding: 2 * theme.spacing.unit,
-    },
-});
-
-export default withStyles(styles)(Events);
+export default Events;

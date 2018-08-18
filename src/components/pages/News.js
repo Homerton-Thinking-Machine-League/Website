@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Card, CardContent, Typography } from '@material-ui/core';
+import { withStyles, Typography } from '@material-ui/core';
 import moment from 'moment';
 import marked from '../../util/markdown';
 import Loader from '../Loader';
+import PaddedPaper from '../PaddedPaper';
 import { NotificationContext } from '../../util/notifications';
 
 class News extends React.Component {
@@ -59,22 +60,20 @@ class News extends React.Component {
         return (
             <React.Fragment>
                 {posts.map(post => (
-                    <Card key={post.id} className={classes.card}>
-                        <CardContent>
-                            <div className={classes.meta}>
-                                <Typography color="textSecondary">
-                                    {post.author}
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    {News.getTimeString(post.time)}
-                                </Typography>
-                            </div>
-                            <Typography
-                                // eslint-disable-next-line react/no-danger
-                                dangerouslySetInnerHTML={{ __html: marked(post.text) }}
-                            />
-                        </CardContent>
-                    </Card>
+                    <PaddedPaper key={post.id} className={classes.post}>
+                        <div className={classes.meta}>
+                            <Typography color="textSecondary">
+                                {post.author}
+                            </Typography>
+                            <Typography color="textSecondary">
+                                {News.getTimeString(post.time)}
+                            </Typography>
+                        </div>
+                        <Typography
+                            // eslint-disable-next-line react/no-danger
+                            dangerouslySetInnerHTML={{ __html: marked(post.text) }}
+                        />
+                    </PaddedPaper>
                 ))}
                 {loading ? <Loader /> : null}
             </React.Fragment>
@@ -83,8 +82,7 @@ class News extends React.Component {
 }
 
 const styles = theme => ({
-    card: {
-        padding: 2 * theme.spacing.unit,
+    post: {
         marginBottom: 2 * theme.spacing.unit,
     },
     meta: {

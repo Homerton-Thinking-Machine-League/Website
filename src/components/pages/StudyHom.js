@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles, Paper, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import PaddedPaper from '../PaddedPaper';
 import marked from '../../util/markdown';
 
-const StudyHom = props => (
-    <Paper className={props.classes.homePaper}>
-
+const StudyHom = () => (
+    <PaddedPaper>
         <Typography
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
@@ -15,20 +14,7 @@ Homerton to study Computer Science.
                 `),
             }}
         />
-    </Paper>
+    </PaddedPaper>
 );
 
-StudyHom.propTypes = {
-    classes: PropTypes.objectOf(PropTypes.string).isRequired,
-};
-
-const styles = theme => ({
-    homePaper: {
-        paddingTop: theme.spacing.unit * 3,
-        paddingBottom: theme.spacing.unit * 3,
-        paddingLeft: theme.spacing.unit * 8,
-        paddingRight: theme.spacing.unit * 8,
-    },
-});
-
-export default withStyles(styles)(StudyHom);
+export default StudyHom;
