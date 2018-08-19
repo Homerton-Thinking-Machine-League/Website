@@ -64,33 +64,44 @@ class News extends React.Component {
     }
 
     render() {
-        const { posts } = this.state;
+        const { posts, hasMore } = this.state;
         const { classes } = this.props;
         return (
-            <InfiniteScroll
-                hasMore={this.state.hasMore}
-                loadMore={page => this.loadMore(page)}
-                loader={<Loader key="loader_component" />}
-                threshold={100}
-                pageStart={-1}
-            >
-                {posts.map(post => (
-                    <PaddedPaper key={post.id} className={classes.post}>
-                        <div className={classes.meta}>
-                            <Typography color="textSecondary">
-                                {post.author}
-                            </Typography>
-                            <Typography color="textSecondary">
-                                {News.getTimeString(post.time)}
-                            </Typography>
-                        </div>
-                        <Typography
-                            // eslint-disable-next-line react/no-danger
-                            dangerouslySetInnerHTML={{ __html: marked(post.text) }}
-                        />
-                    </PaddedPaper>
-                ))}
-            </InfiniteScroll>
+            <React.Fragment>
+                <InfiniteScroll
+                    hasMore={this.state.hasMore}
+                    loadMore={page => this.loadMore(page)}
+                    loader={<Loader key="loader_component" />}
+                    threshold={100}
+                    pageStart={-1}
+                >
+                    {posts.map(post => (
+                        <PaddedPaper key={post.id} className={classes.post}>
+                            <div className={classes.meta}>
+                                <Typography color="textSecondary">
+                                    {post.author}
+                                </Typography>
+                                <Typography color="textSecondary">
+                                    {News.getTimeString(post.time)}
+                                </Typography>
+                            </div>
+                            <Typography
+                                // eslint-disable-next-line react/no-danger
+                                dangerouslySetInnerHTML={{ __html: marked(post.text) }}
+                            />
+                        </PaddedPaper>
+                    ))}
+                </InfiniteScroll>
+                {hasMore ? null : (
+                    <Typography
+                        align="center"
+                        color="primary"
+                        variant="title"
+                    >
+                        {posts.length === 0 ? 'No news to show' : 'No older news'}
+                    </Typography>
+                )}
+            </React.Fragment>
         );
     }
 }
