@@ -43,7 +43,12 @@ class News extends React.Component {
         const limit = this.postsPerPage;
         const offset = page * this.postsPerPage;
         fetch(`/api/news?offset=${offset}&limit=${limit}`)
-            .then(response => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new TypeError(response.statusText);
+                }
+                return response.json();
+            })
             .then((posts) => {
                 this.setState(prevState => ({
                     posts: prevState.posts.concat(posts),
@@ -52,6 +57,9 @@ class News extends React.Component {
             })
             .catch((err) => {
                 this.props.addNotification('error', err.message);
+                this.setState({
+                    hasMore: false,
+                });
             });
     }
 

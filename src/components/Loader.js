@@ -4,9 +4,9 @@ import { withStyles, CircularProgress } from '@material-ui/core';
 
 const Loader = props => <CircularProgress className={props.classes.progress} />;
 
-const styles = theme => ({
+const styles = () => ({
     progress: {
-        margin: theme.spacing.unit * 2,
+        margin: 'auto', // theme.spacing.unit * 2,
     },
 });
 
