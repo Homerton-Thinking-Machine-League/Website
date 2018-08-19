@@ -2,11 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, CircularProgress } from '@material-ui/core';
 
-const Loader = props => <CircularProgress className={props.classes.progress} />;
+const Loader = ({ classes }) => (
+    <div className={classes.wrapper}>
+        <CircularProgress className={classes.progress} />
+    </div>
+);
 
-const styles = () => ({
+const styles = theme => ({
+    wrapper: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
     progress: {
-        margin: 'auto', // theme.spacing.unit * 2,
+        margin: theme.spacing.unit * 2,
     },
 });
 
