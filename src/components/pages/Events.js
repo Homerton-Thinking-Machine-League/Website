@@ -5,7 +5,7 @@ import PaddedPaper from '../PaddedPaper';
 const Events = () => (
     <PaddedPaper>
         <Typography variant="subheading">
-            The events will appear here when we finialise the schedule.
+            The events will appear here when we finalise the schedule.
         </Typography>
     </PaddedPaper>
 );
