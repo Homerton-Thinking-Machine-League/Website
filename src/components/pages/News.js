@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Typography } from '@material-ui/core';
 import moment from 'moment';
+import InfiniteScroll from 'react-infinite-scroller';
 import marked from '../../util/markdown';
 import Loader from '../Loader';
 import PaddedPaper from '../PaddedPaper';
@@ -17,12 +18,10 @@ class News extends React.Component {
         super();
         this.state = {
             posts: [],
-            loading: true,
+            hasMore: true,
         };
-    }
-
-    componentDidMount() {
-        this.loadPosts();
+        this.postsPerPage = 5;
+        this.handleScrollListener = () => this.handleScroll();
     }
 
     static getTimeString(time) {
@@ -40,25 +39,33 @@ class News extends React.Component {
         return momentTime.format('D MMM Y');
     }
 
-    loadPosts() {
-        const offset = this.state.posts.length;
-        fetch(`/api/news?offset=${offset}`)
+    loadMore(page) {
+        const limit = this.postsPerPage;
+        const offset = page * this.postsPerPage;
+        fetch(`/api/news?offset=${offset}&limit=${limit}`)
             .then(response => response.json())
-            .then(posts => this.setState(prevState => ({
-                posts: prevState.posts.concat(posts),
-                loading: false,
-            })))
-            .catch((error) => {
-                this.setState({ loading: false });
-                this.props.addNotification('error', error.message);
+            .then((posts) => {
+                this.setState(prevState => ({
+                    posts: prevState.posts.concat(posts),
+                    hasMore: posts.length !== 0,
+                }));
+            })
+            .catch((err) => {
+                this.props.addNotification('error', err.message);
             });
     }
 
     render() {
-        const { posts, loading } = this.state;
+        const { posts } = this.state;
         const { classes } = this.props;
         return (
-            <React.Fragment>
+            <InfiniteScroll
+                hasMore={this.state.hasMore}
+                loadMore={page => this.loadMore(page)}
+                loader={<Loader key="loader_component" />}
+                threshold={100}
+                pageStart={-1}
+            >
                 {posts.map(post => (
                     <PaddedPaper key={post.id} className={classes.post}>
                         <div className={classes.meta}>
@@ -75,8 +82,7 @@ class News extends React.Component {
                         />
                     </PaddedPaper>
                 ))}
-                {loading ? <Loader /> : null}
-            </React.Fragment>
+            </InfiniteScroll>
         );
     }
 }

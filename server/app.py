@@ -36,7 +36,7 @@ def get_committee():
 @app.route('/api/news')
 def get_news():
     offset = request.args.get('offset') or 0
-    limit = 10
+    limit = request.args.get('limit') or 1
     
     query = (sa.sql.select([posts_table.c.id, users_table.c.name, posts_table.c.time, posts_table.c.text])
         .select_from(users_table.join(posts_table))
