@@ -6,15 +6,13 @@ connection = None
 def init(config_file):
     global connection
     if connection is not None:
-        print("Detected database reinitialisation")
         return
     with open(config_file) as f:
-        config = json.load(f)
+        config = json.load(f)["database"]
     engine = create_engine(
         "mysql+pymysql://"
         + config["username"] + ":" + config["password"]
         + "@" + config["host"] + ":" + str(config["port"])
-        + "/" + config["db_name"]
+        + "/" + config["database"]
     )
     connection = engine.connect()
-    print("Connected to the database")

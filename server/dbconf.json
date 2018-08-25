@@ -1,7 +1,0 @@
-{
-    "host": "localhost",
-    "port": 3306,
-    "username": "html",
-    "password": "password",
-    "db_name": "html"
-}

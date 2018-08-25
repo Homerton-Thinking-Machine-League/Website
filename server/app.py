@@ -2,9 +2,9 @@ import os
 from flask import Flask, send_from_directory, send_file, redirect, request, abort, json
 import db
 import sqlalchemy as sa
-# import json
+import json
 
-db.init('dbconf.json')
+db.init('config.json')
 metadata = sa.MetaData();
 
 posts_table = sa.Table('posts',
@@ -23,6 +23,8 @@ users_table = sa.Table('users',
 )
 
 app = Flask(__name__, static_folder="../build/")
+with open("config.json") as f:
+    config = json.load(f)["server"]
 
 @app.route('/api/committee')
 def get_committee():
