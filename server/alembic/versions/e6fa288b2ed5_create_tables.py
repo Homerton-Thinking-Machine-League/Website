@@ -7,7 +7,7 @@ Create Date: 2018-09-20 13:17:17.159458
 """
 from alembic import op
 from sqlalchemy import (
-    Column, ForeignKey, Integer, String, Text, DateTime, Binary
+    Column, ForeignKey, Integer, String, Text, DateTime
 )
 
 
