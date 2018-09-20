@@ -1,38 +1,13 @@
 import os
 from flask import Flask, send_from_directory, send_file, request
-from db import Db
-import sqlalchemy as sa
+import db
+from schema import Tables
+from sqlalchemy import sql, desc
 import json
-
-Db('config.json')
-
-from entities.post import post as posts_table
-from entities.user import user as users_table
-from entities.role import role
-
-(Db.metadata()).create_all(Db.engine())
-
-
-# posts_table = sa.Table(
-#     'posts',
-#     metadata,
-#     sa.Column('id', sa.INTEGER, primary_key=True),
-#     sa.Column('author_id', sa.INTEGER, sa.ForeignKey('users.id'), nullable=False),
-#     sa.Column('time', sa.TIMESTAMP(timezone=True)),
-#     sa.Column('text', sa.TEXT)
-# )
-
-# users_table = sa.Table(
-#     'users',
-#     metadata,
-#     sa.Column('id', sa.INTEGER, primary_key=True),
-#     sa.Column('name', sa.VARCHAR(255), nullable=False),
-#     sa.Column('role_id', sa.INTEGER, sa.ForeignKey('roles.id'), nullable=False)
-# )
+from controllers import news_controller
 
 app = Flask(__name__, static_folder="../build/")
-with open("config.json") as f:
-    config = json.load(f)["server"]
+
 
 @app.route('/api/committee')
 def get_committee():
@@ -44,35 +19,21 @@ def get_committee():
         return "No pics :-(", 404
     return send_file("./data/committee.json"), 200
 
+
 @app.route('/api/news')
 def get_news():
-    offset = request.args.get('offset') or 0
-    limit = request.args.get('limit') or 1
+    return json.dumps(news_controller.get(request))
 
-    query = (sa.sql.select([posts_table.c.id, users_table.c.name, posts_table.c.time, posts_table.c.text])
-        .select_from(users_table.join(posts_table))
-        .order_by(sa.desc(posts_table.c.time))
-        .limit(limit)
-        .offset(offset)
-    )
-    result = Db.connection().execute(query)
-    obj = [
-        {
-            "id": id,
-            "author": author,
-            "time": str(time),
-            "text": text
-        } for id, author, time, text in result
-    ]
-    return json.dumps(obj)
 
 @app.route('/api/<path:path>')
 def unknown_api_endpoint(path):
     return "Unknown endpoint /api/" + path, 404
 
 
-# Serve React App
 react_app_folder = "../build/"
+
+
+# Serve React App
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react_app(path):

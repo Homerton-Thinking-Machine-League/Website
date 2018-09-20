@@ -6,8 +6,9 @@ Create Date: 2018-09-20 13:17:17.159458
 
 """
 from alembic import op
-from sqlalchemy import (Column, ForeignKey,
-                        INTEGER, VARCHAR, TEXT, TIMESTAMP)
+from sqlalchemy import (
+    Column, ForeignKey, Integer, String, Text, DateTime, Binary
+)
 
 
 # revision identifiers, used by Alembic.
@@ -20,8 +21,8 @@ depends_on = None
 def upgrade():
     op.create_table(
         'role',
-        Column('id', INTEGER, primary_key=True),
-        Column('name', VARCHAR(255), nullable=False)
+        Column('id', Integer, primary_key=True),
+        Column('name', String(255), nullable=False)
     )
     op.execute('''
         INSERT INTO "role" (name) VALUES ('Admin'), ('User');
@@ -29,44 +30,55 @@ def upgrade():
 
     op.create_table(
         'user',
-        Column('id', INTEGER, primary_key=True),
-        Column('name', VARCHAR(255), nullable=False),
-        Column('role_id', INTEGER, ForeignKey('role.id'), nullable=False)
+        Column('id', Integer, primary_key=True),
+        Column('name', String(255), nullable=False),
+        Column('role_id', Integer, ForeignKey('role.id'), nullable=False)
     )
 
     op.create_table(
-        'post',
-        Column('id', INTEGER, primary_key=True),
-        Column('author_id', INTEGER, ForeignKey('user.id'), nullable=False),
-        Column('time', TIMESTAMP(timezone=True), nullable=False),
-        Column('text', TEXT)
+        'news',
+        Column('id', Integer, primary_key=True),
+        Column('author_id', Integer, ForeignKey('user.id'), nullable=False),
+        Column('time', DateTime(timezone=True), nullable=False),
+        Column('text', Text)
     )
 
     op.create_table(
         'alt_id_type',
-        Column('id', INTEGER, primary_key=True),
-        Column('name', VARCHAR(255), nullable=False),
+        Column('id', Integer, primary_key=True),
+        Column('name', String(255), nullable=False),
     )
     op.execute('''
-        INSERT INTO "alt_id_type" (name) VALUES ('crsid');
+        INSERT INTO "alt_id_type" (name)
+        VALUES ('crsid');
     ''')
 
     op.create_table(
         'alt_id_user',
-        Column('user_id', INTEGER, ForeignKey('user.id'), nullable=False),
-        Column('alt_id_type_id', INTEGER,
+        Column('user_id', Integer, ForeignKey('user.id'), nullable=False),
+        Column('alt_id_type_id', Integer,
                ForeignKey('alt_id_type.id'), nullable=False),
-        Column('value', VARCHAR(255), nullable=False)
+        Column('value', String(255), nullable=False)
     )
     op.create_primary_key(
         'pk_alt_id_user', 'alt_id_user',
         ['user_id', 'alt_id_type_id']
     )
 
+    op.create_table(
+        'committee',
+        Column('id', Integer, primary_key=True),
+        Column('user_id', Integer, ForeignKey('user.id'), nullable=False),
+        Column('position', String(255), nullable=False),
+        Column('email', String(255), nullable=False),
+        Column('picture', Binary, nullable=False),
+    )
+
 
 def downgrade():
+    op.drop_table('committee')
     op.drop_table('alt_id_user')
     op.drop_table('alt_id_type')
-    op.drop_table('post')
+    op.drop_table('news')
     op.drop_table('user')
     op.drop_table('role')
