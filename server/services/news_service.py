@@ -11,4 +11,6 @@ def get_desc_time(**kwargs):
         **kwargs
     )
     result = db.connection.execute(query)
-    return to_dict_list.all(result, stringify=['time'])
+    return to_dict_list.all(result, transform={
+        'time': lambda t: str(t)
+    })

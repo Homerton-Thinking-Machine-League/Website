@@ -2,7 +2,7 @@ from sqlalchemy import asc, desc
 
 
 def apply(query, limit=None, offset=None,
-          order_by=None, order_dir='ASC'):
+          order_by=None, order_dir='ASC', **_):
     if limit is not None:
         query = query.limit(limit)
     if offset is not None:

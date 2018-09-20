@@ -1,9 +1,13 @@
-def row(row, stringify=[]):
+def row(row, transform={}):
     d = dict(row)
-    for key in stringify:
-        d[key] = str(d[key])
+    for key in d:
+        if key in transform:
+            d[key] = transform[key](d[key])
     return d
 
 
-def all(result, stringify=[]):
-    return list(map(lambda r: row(r, stringify=stringify), list(result)))
+def all(result, transform={}):
+    return list(map(
+        lambda r: row(r, transform=transform),
+        list(result)
+    ))

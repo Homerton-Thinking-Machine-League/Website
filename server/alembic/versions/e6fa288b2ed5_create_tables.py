@@ -66,17 +66,26 @@ def upgrade():
     )
 
     op.create_table(
+        'picture',
+        Column('id', Integer, primary_key=True),
+        Column('readable_name', String(255)),
+        Column('path', String(255), nullable=False),
+    )
+
+    op.create_table(
         'committee',
         Column('id', Integer, primary_key=True),
-        Column('user_id', Integer, ForeignKey('user.id'), nullable=False),
         Column('position', String(255), nullable=False),
         Column('email', String(255), nullable=False),
-        Column('picture', Binary, nullable=False),
+        Column('sorting_priority', Integer),
+        Column('user_id', Integer, ForeignKey('user.id'), nullable=False),
+        Column('picture_id', Integer, ForeignKey('picture.id'))
     )
 
 
 def downgrade():
     op.drop_table('committee')
+    op.drop_table('picture')
     op.drop_table('alt_id_user')
     op.drop_table('alt_id_type')
     op.drop_table('news')
