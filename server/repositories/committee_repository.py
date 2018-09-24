@@ -8,9 +8,9 @@ def get(**kwargs):
         sql.select([
             Tables.committee.c.id, Tables.committee.c.position,
             Tables.committee.c.email, Tables.user.c.name,
-            Tables.picture.c.path
+            Tables.picture.c.id.label('picture')
         ]).select_from(
-            Tables.committee.join(Tables.user).join(Tables.picture)
+            Tables.committee.join(Tables.user).outerjoin(Tables.picture)
         )
     )
     query = options.apply(query, **kwargs)

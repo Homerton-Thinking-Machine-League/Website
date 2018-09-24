@@ -1,7 +1,7 @@
 import db
 from schema import Tables
 from repositories import news_repository
-from .util import to_dict_list
+from .util import to_dicts
 
 
 def get_desc_time(**kwargs):
@@ -11,6 +11,6 @@ def get_desc_time(**kwargs):
         **kwargs
     )
     result = db.connection.execute(query)
-    return to_dict_list.all(result, transform={
+    return to_dicts.all(result, transform={
         'time': lambda t: str(t)
     })

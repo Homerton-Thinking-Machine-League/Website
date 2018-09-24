@@ -5,5 +5,9 @@
         "username": "postgres",
         "password": "password",
         "database": "thehtml"
+    },
+    "server": {
+        "pathToUploads": "data/uploads/",
+        "allowedExtensions": ["png", "jpg", "jpeg"]
     }
 }

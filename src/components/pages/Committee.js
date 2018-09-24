@@ -22,16 +22,6 @@ class Committee extends React.Component {
     componentDidMount() {
         fetch('/api/committee')
             .then(response => response.json())
-            .then(members =>
-                Promise.all(members.map(member =>
-                    fetch(`/api/committee?picture=${member.picture}`)
-                        .then(async (response) => {
-                            const blob = await response.blob();
-                            return {
-                                ...member,
-                                picture: URL.createObjectURL(blob),
-                            };
-                        }))))
             .then(data => this.setState({ loading: false, data }))
             .catch((error) => {
                 this.setState({ loading: false });
@@ -49,7 +39,7 @@ class Committee extends React.Component {
             return (
                 <Grid container spacing={16}>
                     {data.map(member => (
-                        <Grid item xs={6} md={3} key={member.picture}>
+                        <Grid item xs={6} md={3} key={member.id}>
                             <Card className={classes.card}>
                                 <CardContent>
                                     <Avatar

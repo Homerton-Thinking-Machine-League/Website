@@ -1,8 +1,7 @@
 import db
-from base64 import b64encode
 from schema import Tables
 from repositories import committee_repository
-from .util import to_dict_list
+from .util import to_dicts
 
 
 def get():
@@ -11,6 +10,7 @@ def get():
         order_dir='ASC'
     )
     result = db.connection.execute(query)
-    return to_dict_list.all(result, transform={
-        'picture': lambda pic: b64encode(pic)
+    return to_dicts.all(result, transform={
+        'picture':
+            lambda pic: '' if pic is None else '/api/pictures/' + str(pic)
     })
