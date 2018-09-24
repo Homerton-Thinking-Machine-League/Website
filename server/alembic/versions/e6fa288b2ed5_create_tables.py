@@ -71,6 +71,7 @@ def upgrade():
         Column('readable_name', String(255)),
         Column('path', String(255), nullable=False),
     )
+    op.create_unique_constraint('uq_picture_path', 'picture', ['path'])
 
     op.create_table(
         'committee',
