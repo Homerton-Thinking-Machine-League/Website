@@ -15,7 +15,7 @@ app.route('/api/news', endpoint='get_news', methods=['GET'])(
     news_controller.get
 )
 
-app.route('/api/pictures/<int:id>', endpoint='get_picture_by_id', methods=['GET'])(
+app.route('/pictures/<int:id>', endpoint='get_picture_by_id', methods=['GET'])(
     picture_controller.get_by_id
 )
 

@@ -12,5 +12,5 @@ def get():
     result = db.connection.execute(query)
     return to_dicts.all(result, transform={
         'picture':
-            lambda pic: '' if pic is None else '/api/pictures/' + str(pic)
+            lambda pic: '' if pic is None else '/pictures/' + str(pic)
     })

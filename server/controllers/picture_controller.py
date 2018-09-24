@@ -20,7 +20,7 @@ def get_by_id(id):
     elif extension == '.png':
         mimetype_ext = 'png'
     else:
-        raise Exception('Unsupported file format')
+        raise Exception('Unsupported file extension')
 
     full_path = os.path.join(path_to_uploads, pic_path)
     return send_file(full_path, mimetype='image/'+mimetype_ext)
