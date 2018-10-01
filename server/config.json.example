@@ -9,9 +9,5 @@
     "server": {
         "pathToUploads": "data/uploads/",
         "allowedExtensions": ["png", "jpg", "jpeg"]
-    },
-    "facebook": {
-        "baseurl": "https://graph.facebook.com/v3.1/",
-        "accessToken": "p1ac3h01der"
     }
 }
