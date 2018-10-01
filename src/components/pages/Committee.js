@@ -21,7 +21,13 @@ class Committee extends React.Component {
 
     componentDidMount() {
         fetch('/api/committee')
-            .then(response => response.json())
+            .then(async (response) => {
+                const json = await response.json();
+                if (!response.ok) {
+                    throw new Error(json.message || response.statusText);
+                }
+                return json;
+            })
             .then(data => this.setState({ loading: false, data }))
             .catch((error) => {
                 this.setState({ loading: false });

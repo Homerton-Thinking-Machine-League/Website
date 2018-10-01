@@ -43,11 +43,12 @@ class News extends React.Component {
         const limit = this.postsPerPage;
         const offset = page * this.postsPerPage;
         fetch(`/api/news?offset=${offset}&limit=${limit}`)
-            .then((response) => {
+            .then(async (response) => {
+                const json = await response.json();
                 if (!response.ok) {
-                    throw new TypeError(response.statusText);
+                    throw new Error(json.message || response.statusText);
                 }
-                return response.json();
+                return json;
             })
             .then((posts) => {
                 this.setState(prevState => ({
