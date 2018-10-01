@@ -58,7 +58,7 @@
     "build": "node scripts/build.js",
     "dev": "npm-run-all --parallel dev_server dev_client",
     "dev_client": "node scripts/dev.js",
-    "dev_server": "cd server; FLASK_ENV=development pipenv run flask run --host 0.0.0.0",
+    "dev_server": "cd server; FLASK_ENV=development pipenv run flask run",
     "dev_server_local": "cd server; FLASK_ENV=development flask run",
     "test": "node scripts/test.js --env=jsdom"
   },
