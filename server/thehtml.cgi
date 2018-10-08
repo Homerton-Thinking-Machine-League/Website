@@ -1,7 +1,5 @@
-#!/usr/local/bin/python3
+#!/bin/bash
 
-import cgitb
-from wsgiref.handlers import CGIHandler
-from app import app
-cgitb.enable()
-CGIHandler().run(app)
+PATH="/usr/bin:/usr/local/bin:~thehtml/.local/bin"
+
+pipenv run python runcgi.py
