@@ -25,8 +25,7 @@ class News extends React.Component {
     }
 
     static getTimeString(time) {
-        const momentTime = moment.utc(time, 'YYYY-MM-DD HH:mm:ss');
-        momentTime.local();
+        const momentTime = moment(time);
         if (momentTime > moment().subtract(1, 'days')) {
             return momentTime.fromNow();
         }
