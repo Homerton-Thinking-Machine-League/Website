@@ -7,7 +7,7 @@ Create Date: 2018-09-20 13:17:17.159458
 """
 from alembic import op
 from sqlalchemy import (
-    Column, ForeignKey, Integer, String, Text, DateTime
+    func, Column, ForeignKey, Integer, String, Text, DateTime
 )
 
 
@@ -39,7 +39,8 @@ def upgrade():
         'news',
         Column('id', Integer, primary_key=True),
         Column('author_id', Integer, ForeignKey('user.id'), nullable=False),
-        Column('time', DateTime(timezone=True), nullable=False),
+        Column('time', DateTime(timezone=True), nullable=False,
+               server_default=func.now()),
         Column('text', Text)
     )
 
