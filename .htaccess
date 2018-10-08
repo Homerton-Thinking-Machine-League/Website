@@ -1,3 +1,5 @@
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ ./server/thehtml.cgi/$1 [L]
+
+RewriteCond %{REQUEST_URI} !^/server/thehtml.cgi
+RewriteCond %{REQUEST_URI} !^/comeAndCode
+RewriteRule (.*) server/thehtml.cgi/$1 [L]

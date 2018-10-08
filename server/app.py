@@ -1,4 +1,4 @@
-import os
+from os.path import normpath
 from flask import Flask, send_from_directory
 from controllers import (
     news_controller, committee_controller, picture_controller
@@ -25,11 +25,12 @@ def unknown_api_endpoint(path):
     return "Unknown endpoint /api/" + path, 404
 
 
+@app.route('/static/<path:path>')
+def send_static_content(path):
+    return send_from_directory(normpath(app.static_folder + '/static/'), path)
+
+
 # Serve React App
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve_react_app(path):
-    react_app_folder = "../build/"
-    if path == "" or not os.path.exists(react_app_folder + path):
-        return send_from_directory(react_app_folder, 'index.html')
-    return send_from_directory(react_app_folder, path)
+@app.route('/')
+def serve_react_app():
+    return app.send_static_file('index.html')
