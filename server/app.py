@@ -32,5 +32,6 @@ def send_static_content(path):
 
 # Serve React App
 @app.route('/')
-def serve_react_app():
+@app.route('/<path:path>')
+def serve_react_app(path=''):
     return app.send_static_file('index.html')

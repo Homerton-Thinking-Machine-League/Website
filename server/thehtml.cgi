@@ -1,5 +1,5 @@
 #!/bin/bash
 
-PATH="/usr/bin:/usr/local/bin:~thehtml/.local/bin"
+PATH="/societies/thehtml/pip_packages/bin:/usr/bin:/usr/local/bin"
 
 pipenv run python runcgi.py
