@@ -6,7 +6,7 @@ import ScrollToTop from './ScrollToTop';
 import Page from '../util/pages';
 import Header from './header/Header';
 import NotificationLayer from './notifications/NotificationLayer';
-import { Home, News, Events, Committee, StudyHom, Privacy } from './pages';
+import { Home, News, Events, Committee, Privacy } from './pages';
 import appTheme from '../theme';
 import background from '../res/Homerton.jpg';
 
@@ -16,7 +16,7 @@ const App = ({ classes, location }) => (
             <CssBaseline />
             <div className={classes.background} />
             <Header
-                pages={['home', 'news', 'events', 'committee', 'studyHom']}
+                pages={['home', 'news', 'events', 'committee', 'comeAndCode']}
             />
             <div className={classes.content}>
                 <Hidden mdUp>
@@ -37,7 +37,10 @@ const App = ({ classes, location }) => (
                         <Route path={Page.routes[Page.news]} component={News} />
                         <Route path={Page.routes[Page.events]} component={Events} />
                         <Route path={Page.routes[Page.committee]} component={Committee} />
-                        <Route path={Page.routes[Page.studyHom]} component={StudyHom} />
+                        <Route
+                            path={Page.routes[Page.comeAndCode]}
+                            component={() => { window.location = '/comeAndCode'; return null; }}
+                        />
                         <Route path={Page.routes[Page.privacy]} component={Privacy} />
                     </Switch>
                 </NotificationLayer>

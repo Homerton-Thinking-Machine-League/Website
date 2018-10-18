@@ -3,16 +3,15 @@ import {
     Home,
     Event as Events,
     Group as Committee,
-    School as Homerton,
 } from '@material-ui/icons';
-import { News } from '../components/Svg';
+import { News, Python } from '../components/Svg';
 
 const Page = {
     home: 0,
     news: 1,
     events: 2,
     committee: 3,
-    studyHom: 4,
+    comeAndCode: 4,
     privacy: 5,
 };
 
@@ -21,7 +20,7 @@ Page.routes = {
     [Page.news]: '/news',
     [Page.events]: '/events',
     [Page.committee]: '/committee',
-    [Page.studyHom]: '/studyHom',
+    [Page.comeAndCode]: '/comeAndCode',
     [Page.privacy]: '/privacy',
 };
 
@@ -30,7 +29,7 @@ Page.pageLabels = {
     [Page.news]: 'News',
     [Page.events]: 'Events',
     [Page.committee]: 'Committee',
-    [Page.studyHom]: 'Study at Homerton',
+    [Page.comeAndCode]: 'Come and Code',
     [Page.privacy]: 'Privacy Policy',
 };
 
@@ -39,7 +38,7 @@ Page.pageIcons = {
     [Page.news]: <News />,
     [Page.events]: <Events />,
     [Page.committee]: <Committee />,
-    [Page.studyHom]: <Homerton />,
+    [Page.comeAndCode]: <Python />,
 };
 
 Object.freeze(Page);
