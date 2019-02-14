@@ -1,0 +1,26 @@
+[
+    {
+        "role": "President",
+        "name": "Henry Wright",
+        "email": "soc-html-president@lists.cam.ac.uk",
+        "picture": "president.png"
+    },
+    {
+        "role": "Treasurer",
+        "name": "Joseph Saxby",
+        "email": "soc-html-treasurer@lists.cam.ac.uk",
+        "picture": "treasurer.png"
+    },
+    {
+        "role": "Communications and Webmaster",
+        "name": "Leo Zlotnikov",
+        "email": "soc-html-webmaster@lists.cam.ac.uk",
+        "picture": "webmaster.png"
+    },
+    {
+        "role": "Events and Speakers",
+        "name": "Benjamin Searle",
+        "email": "soc-html-events@lists.cam.ac.uk",
+        "picture": "events.png"
+    }
+]

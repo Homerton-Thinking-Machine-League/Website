@@ -9,8 +9,12 @@ sqlalchemy = "*"
 alembic = "*"
 typing = "*"
 "psycopg2-binary" = "*"
+pipenv = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3"
+
+[scripts]
+launch = "python runcgi.py"
