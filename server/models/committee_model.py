@@ -1,9 +1,9 @@
+import db
 from schema import Tables
+from .util import to_dicts, options
 from sqlalchemy import sql
-from .util import options
 
-
-def get(**kwargs):
+def get():
     query = (
         sql.select([
             Tables.committee.c.id, Tables.committee.c.position,
@@ -13,5 +13,13 @@ def get(**kwargs):
             Tables.committee.join(Tables.user).outerjoin(Tables.picture)
         )
     )
-    query = options.apply(query, **kwargs)
-    return query
+    query = options.apply(query,
+        order_by=Tables.committee.c.sorting_priority,
+        order_dir='ASC'
+    )
+
+    result = db.connection.execute(query)
+    return to_dicts.all(result, transform={
+        'picture':
+            lambda pic: '' if pic is None else '/pictures/' + str(pic)
+    })

@@ -1,6 +1,6 @@
 import json
 import os
-from services import picture_service
+from models import picture_model
 from flask import send_file
 
 path_to_uploads = None
@@ -11,7 +11,7 @@ with open('config.json') as f:
 
 
 def get_by_id(id):
-    pic_path = picture_service.get_by_id(id)['path']
+    pic_path = picture_model.get_by_id(id)['path']
     _, extension = os.path.splitext(pic_path)
 
     mimetype_ext = ''
